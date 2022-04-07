@@ -1,38 +1,94 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.mainApp {
   display: flex;
-  flex-direction: column;
+  height: 100%;
+  width: 95%;
+  margin: 10px;
+  text-align: center;
+  justify-content: space-around;
   align-items: center;
+}
+
+.webcamContainer {
+  width: 550px;
+  height: 100%;
+}
+
+.cameraToggle {
+  background-color: gray;
+  color: #fff;
+  cursor: pointer;
+  margin: 0px 5px 10px 5px;
+}
+
+.cameraSelector {
+  margin: 10px 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  overflow: auto;
+  width: 550px;
+}
+
+.singleCamera {
+  width: 100px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.selectedCam {
+  background-color: burlywood;
+  color: #fff;
+}
+
+.shantoBtn {
+  width: 100px;
+  height: 50px;
+  margin: 5px;
+  cursor:pointer;
+}
+
+.stopCapture {
+  background-color: rosybrown;
+}
+
+.startCapture {
+  background-color:cornflowerblue;
+}
+
+.deleteBtn {
+  background-color: red;
+}
+
+.downloadBtn {
+  background-color:cadetblue;
+}
+
+.fileNameContainer {
+  margin: 5px;
+  display: flex;
+  width: 500px;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.fileSelectContainer {
+  text-align: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.fileList {
+  border: solid 1px black;
+  padding: 5px 20px;
+}
+
+.fileItem {
+  cursor: pointer;
+  margin: 10px;
+  padding: 5px;
+}
+
+.fileNameInput {
+  width: 200px;
+  height: 30px;
+  font-weight: 600;
 }
