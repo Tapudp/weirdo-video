@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Webcam from 'react-webcam';
 
-const CameraSelector = ({ listOfOptions, handleCameraSelect, selectedDevice }) => {
-  const [open, toggle] = useState(false);
+const CameraSelector = ({ listOfCameras, handleCameraSelect, selectedDevice }) => {
   return (
-    <div
-      style={{ minWidth: 120 }}
-      onClick={() => toggle(true)}
-      className="cameraSelectContainer"
-    >
+    <div className="cameraSelectContainer">
       <div className='cameraToggle'>
-        Click to see available list of Cameras
+        Available list of Cameras
       </div>
-      {open && <div
+      <div
         className="cameraSelector"
       >
-        {listOfOptions.map((device, idx) => (
+        {listOfCameras.map((device, idx) => (
           <div
             key={device.deviceId}
             className={`singleCamera ${device.deviceId === selectedDevice.deviceId ? 'selectedCam' : ''}`}
@@ -24,7 +20,7 @@ const CameraSelector = ({ listOfOptions, handleCameraSelect, selectedDevice }) =
             {device.label}
           </div>
         ))}
-      </div>}
+      </div>
     </div>
     )
 }

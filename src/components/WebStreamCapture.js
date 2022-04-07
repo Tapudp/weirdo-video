@@ -11,6 +11,7 @@ const WebcamStreamCapture = ({currentlySelectedFile, selectFile}) => {
     const [selectedDevice, setDeviceId] = React.useState({});
     const [devices, setDevices] = React.useState([]);
     const [captureCount, setCaptureCount] = React.useState(0);
+    let localstream;
   
     const handleStartCaptureClick = React.useCallback(() => {
       setCapturing(true);
@@ -53,20 +54,26 @@ const WebcamStreamCapture = ({currentlySelectedFile, selectFile}) => {
         a.click();
         window.URL.revokeObjectURL(url);
       }
-    }, [recordedChunks]);
+    }, [recordedChunks, captureCount]);
   
     const handleDevices = React.useCallback(
       mediaDevices =>
         setDevices(mediaDevices.filter(({ kind }) => kind === "videoinput")),
       [setDevices]
     );
-  
-    React.useEffect(
-      () => {
+
+
+  React.useEffect(() => {
+    let vid = document.getElementById("vid");
+    if (navigator.mediaDevices.getUserMedia !== null) {
+      navigator.mediaDevices.getUserMedia({video: true, audio: true}).then((stream) => {
         navigator.mediaDevices.enumerateDevices().then(handleDevices);
-      },
-      [handleDevices]
-    );
+        setDeviceId(() => devices.length !== 0 && devices[0]);
+      }).catch((e) => {
+        console.log("background error : " + e.name);
+      });
+    }
+  });
   
   const handleCameraSelect = (device) => {
     selectFile(`nw-15y-cali-nov-${captureCount}`)
@@ -77,15 +84,15 @@ const WebcamStreamCapture = ({currentlySelectedFile, selectFile}) => {
       <>
         <div>
           <CameraSelector
-            listOfOptions={devices}
+            listOfCameras={devices}
             selectedDevice={selectedDevice}
             handleCameraSelect={handleCameraSelect}
           />
-          {selectedDevice.deviceId !== undefined
-            ? <Webcam audio={false} ref={webcamRef} videoConstraints={{ deviceId: selectedDevice.deviceId }} />
-            : <div>Choose a camera from the list</div>
-          }
         </div>
+        {selectedDevice.deviceId !== undefined
+          ? <Webcam audio={true} ref={webcamRef} videoConstraints={{ deviceId: selectedDevice.deviceId }} />
+          : <div>Choose a camera from the list</div>
+        }
         {selectedDevice.deviceId !== undefined ?
           <>
             <button

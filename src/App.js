@@ -21,7 +21,7 @@ const listOfFileNames = [
 ];
 
 function App() {
-  const [currentlySelectedFile, selectFile] = useState({});
+  const [currentlySelectedFile, selectFile] = useState('nw-15y-cali-nov-1');
 
   return (
     <div className='mainApp'>
